@@ -78,7 +78,7 @@ Every project has the same configuration :
 
 So, If there are 2 errors on 4 requests (50%), circuit breaker is open during 5 seconds.
 
-_At first try, there is a 4 requests before trigger the circuit breaker..._
+_At first try, there is 4 requests before trigger the circuit breaker..._
 
 ## Results
 

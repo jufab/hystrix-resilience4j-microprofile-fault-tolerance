@@ -104,6 +104,6 @@ In exception endpoint
 - _Circuit breaker open_ : expose a CircuitBreakerOpenException
 
 
-_Next step : add tests _
+_Next step : add tests_
 
 

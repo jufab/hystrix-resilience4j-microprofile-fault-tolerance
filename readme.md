@@ -6,6 +6,24 @@ I use 3 libraries, and I want to see implementation, configuration, complexity a
 
 To help me (and for my curiosity of course ^_^), I use **microprofile starter** to initialise all this project.
 
+Table of Contents
+=================
+
+  * [Context](#context)
+  * [Microprofile Starter](#microprofile-starter)
+     * [About Wildfly Jar](#about-wildfly-jar)
+  * [Projects](#projects)
+     * [You need](#you-need)
+     * [Run it](#run-it)
+     * [API](#api)
+        * [Project path](#project-path)
+        * [Endpoints](#endpoints)
+  * [Circuit Breaker configuration](#circuit-breaker-configuration)
+  * [Results](#results)
+     * [Hystrix](#hystrix)
+     * [Resilience4j](#resilience4j)
+     * [Microprofile fault tolerance](#microprofile-fault-tolerance)
+
 ## Context
 
 This is a test around this 3 libraries
@@ -41,7 +59,7 @@ Each library is in each folder :
 ### You need
 
 - JDK 11
-- Maven < 3.6.X
+- Maven 3.6.X
 
 ### Run it
 

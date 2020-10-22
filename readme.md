@@ -1,10 +1,10 @@
 # Hystrix - Resilience4j - Microprofile Fault Tolerance
 
-This repository is a test around implementation of resilience and (for the moment) around Circuit breaker
+This repository contains a test around implementation of resilience and (for the moment) around Circuit breaker.
 
 I use 3 libraries, and I want to see implementation, configuration, complexity and result.
 
-To help me (and for my curiosity of course ^_^), I use microprofile starter to initialise all this project
+To help me (and for my curiosity of course ^_^), I use **microprofile starter** to initialise all this project.
 
 ## Context
 
@@ -30,7 +30,9 @@ Version **1.0.0.Alpha4** (include in MP Starter)
 
 [more information about maven plugin](https://docs.wildfly.org/21/Bootable_Guide.html)
 
-## Project
+## Projects
+
+Each library is in each folder :
 
 - [Hystrix](hystrix)
 - [Resilience4j](resilience4j)
@@ -43,7 +45,7 @@ Version **1.0.0.Alpha4** (include in MP Starter)
 
 ### Run it
 
-Start Maven commande
+Start Maven command
 
 ```shell
 mvn clean package wildfly-jar:run
@@ -72,7 +74,7 @@ Every project has the same configuration :
 
 - Request Volume Threshold : 4
 - Error Threshold Percentage : 50% 
-- Sleep Window In Milliseconds : 5s
+- Sleep Window (Duration) : 5 seconds
 
 So, If there are 2 errors on 4 requests (50%), circuit breaker is open during 5 seconds.
 

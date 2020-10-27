@@ -1,35 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.jufab</groupId>
+    <artifactId>hystrixr4jlab-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
   <groupId>fr.jufab</groupId>
   <artifactId>hystrixr4jlab-service-mp-faulttolerance</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <properties>
-    <maven.compiler.target>11</maven.compiler.target>
-    <version.wildfly>19.1.0.Final</version.wildfly>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
-    <maven.compiler.source>11</maven.compiler.source>
-    <final.name>hystrixr4jlab-mp-faulttolerance</final.name>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.eclipse.microprofile</groupId>
-      <artifactId>microprofile</artifactId>
-      <version>3.3</version>
-      <type>pom</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.30</version>
-    </dependency>
-  </dependencies>
-  <build>
-    <finalName>hystrixr4jlab</finalName>
-  </build>
+
   <profiles>
     <profile>
       <id>wildfly</id>
@@ -37,6 +20,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <build>
+        <finalName>hystrixr4jlab</finalName>
         <plugins>
           <plugin>
             <groupId>org.wildfly.plugins</groupId>
@@ -50,7 +34,9 @@
               </execution>
             </executions>
             <configuration>
-              <feature-pack-location>wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}</feature-pack-location>
+              <feature-pack-location>
+                wildfly@maven(org.jboss.universe:community-universe)#${version.wildfly}
+              </feature-pack-location>
               <layers>
                 <layer>jaxrs</layer>
                 <layer>jmx</layer>
@@ -82,4 +68,5 @@
       </repositories>
     </profile>
   </profiles>
+
 </project>

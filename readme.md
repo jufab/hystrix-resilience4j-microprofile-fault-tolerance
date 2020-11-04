@@ -112,9 +112,9 @@ _At first try, there are 4 requests before trigger the circuit breaker..._
 
 You have circuit breaker between your api exposed and an external API (or an other service/database/etc...)
 
-This a sequence diagram to help to understand the Request Volume Threshold (or minimum number of calls for Resilience4j)
-
 Suppose that **Request Volume Threshold** have a value of 2, the sequence is : 
+
+This a sequence diagram to help to understand the Request Volume Threshold (or minimum number of calls for Resilience4j)
 
 ![Request Volume Threshold](img/request-volume-threshold.png)
 
@@ -126,7 +126,7 @@ Circuit breaker open after 2 errors : we suppose Error Threshold Percentage have
 
 This configuration is the percentage of error before circuit breaker open.
 
-So, 50% of 4 Request Volume Threshold, the circuit breker open after 2 errors.
+So, 50% of 4 Request Volume Threshold, the circuit breaker open after 2 errors.
 
 ### Sleep Window
 
@@ -178,13 +178,13 @@ Try to test with a unit test circuit breaker (for example in case of fallback?)
 
 Can forceOpen programmatically
 
-see [here](hystrix/src/test/java/fr/jufab/hystrixr4jlab/infrastructure)
+see [here](hystrix/src/test/java/fr/jufab/hystrixr4jlab/infrastructure/github/)
 
 ### Resilience4j
 
 Can forceOpen programmatically
 
-see [here](resilience4j/src/test/java/fr/jufab/hystrixr4jlab/infrastructure)
+see [here](resilience4j/src/test/java/fr/jufab/hystrixr4jlab/infrastructure/github/)
 
 ### Microprofile fault tolerance
 

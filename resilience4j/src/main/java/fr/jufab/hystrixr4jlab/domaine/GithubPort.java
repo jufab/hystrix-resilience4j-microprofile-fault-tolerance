@@ -7,4 +7,5 @@ package fr.jufab.hystrixr4jlab.domaine;
 public interface GithubPort {
   String getRelease();
   String getException();
+  String getSlowRelease();
 }

@@ -9,30 +9,28 @@ To help me (and for my curiosity of course ^_^), I use **microprofile starter** 
 Table of Contents
 =================
 
-   * [Hystrix - Resilience4j - Microprofile Fault Tolerance](#hystrix---resilience4j---microprofile-fault-tolerance)
-   * [Table of Contents](#table-of-contents)
-      * [Context](#context)
-      * [Microprofile Starter](#microprofile-starter)
-         * [About Wildfly Jar](#about-wildfly-jar)
-      * [Projects](#projects)
-         * [You need](#you-need)
-         * [Run it](#run-it)
-         * [API](#api)
-            * [Project path](#project-path)
-            * [Endpoints](#endpoints)
-      * [Circuit Breaker configuration](#circuit-breaker-configuration)
-         * [Request Volume Threshold](#request-volume-threshold)
-         * [Error Threshold Percentage](#error-threshold-percentage)
-         * [Sleep Window](#sleep-window)
-      * [Results](#results)
-         * [Hystrix](#hystrix)
-         * [Resilience4j](#resilience4j)
-         * [Microprofile fault tolerance](#microprofile-fault-tolerance)
-      * [Unit Tests](#unit-tests)
-         * [Hystrix](#hystrix-1)
-         * [Resilience4j](#resilience4j-1)
-         * [Microprofile fault tolerance](#microprofile-fault-tolerance-1)
-
+* [Context](#context)
+* [Microprofile Starter](#microprofile-starter)
+    * [About Wildfly Jar](#about-wildfly-jar)
+* [Projects](#projects)
+    * [You need](#you-need)
+    * [Run it](#run-it)
+    * [API](#api)
+        * [Project path](#project-path)
+        * [Endpoints](#endpoints)
+* [Circuit Breaker configuration](#circuit-breaker-configuration)
+    * [Request Volume Threshold](#request-volume-threshold)
+    * [Error Threshold Percentage](#error-threshold-percentage)
+    * [Sleep Window](#sleep-window)
+    * [Bonus Resilience4j - Slow Call Rate Threshold and Slow Call Duration Threshold](#bonus-resilience4j---slow-call-rate-threshold-and-slow-call-duration-threshold)
+* [Circuit breaker Results](#circuit-breaker-results)
+    * [Hystrix](#hystrix)
+    * [Resilience4j](#resilience4j)
+    * [Microprofile fault tolerance](#microprofile-fault-tolerance)
+* [Unit Tests](#unit-tests)
+    * [Hystrix](#hystrix-1)
+    * [Resilience4j](#resilience4j-1)
+    * [Microprofile fault tolerance](#microprofile-fault-tolerance-1)
 
 ## Context
 
@@ -42,7 +40,7 @@ This is a test around this 3 libraries
 - [Resilience4j](https://resilience4j.readme.io/)
 - [Microprofile Fault Tolerance](https://download.eclipse.org/microprofile/microprofile-fault-tolerance-2.1/microprofile-fault-tolerance-spec.html)
 
-For the moment, I only use the "Circuit Breaker".
+_For the moment, I only use the "Circuit Breaker"._
 
 ## Microprofile Starter
 
@@ -95,6 +93,7 @@ Every project expose 2 endpoints :
 
 - _/github_ : this endpoint access to github (https://api.github.com/repos/jufab/opentelemetry-angular-interceptor/releases) and have Circuit Breaker configuration but depend on github availability's
 - _/github/exception_ : this endpoint generates a BadRequestException to force circuit breaker reaction  
+- (Only on Resilience4j, see [Bonus](#bonus-resilience4j---slow-call-rate-threshold-and-slow-call-duration-threshold)) _/github/slow_ : this endpoint reduce respone time (with a Thread.sleep() )    
 
 ## Circuit Breaker configuration
 
@@ -144,9 +143,32 @@ With previous sequence and a value of 5 seconds :
 
 ![sleep window](img/sleep_window.png)
  
-[plantuml](http://www.plantuml.com/plantuml/png/lP4_JyCm4CLtVufZWo69G6BfW5fGnSW20wDhFuX5OaVdS__mwN6bkchJ8bL2OdmlxvSxlvj6qIofxzILywPB5jIA377IDAnNzQUJDYrI19lW1Lvg4_fc4KsxqlpT31cif4MFsFGw2hZPAGDE7RG_Y5J5gxUUKcyHJDK3lOV4iy7HX9xdhzHiigpqu9GsufPQK0Ag13FpvDWa9uyC_GNEADOmIR27HWdbG_R24ZpwC2cQ5hj_kKXXW2Vz8Lb92xeZC0UEwXWzkyUiOsYx-PqvUl1yRJ282rvPHE6m6QzTebjiszU8EQb8rNLzJn4cU1kfqmBEpZztVLhJYxGud1ko7Wqk4RNFLkTcdpPMyXTTnrgQCmUcwzkRoqzJblphTQRmDlNT3m00)
+[plantuml](http://www.plantuml.com/plantuml/umla/lP4_JyCm4CLtVufZWo69G6BfW5fGnSW20wDhFuX5OaVdS__mwN6bkchJ8bL2OdmlxvSxlvj6qIofxzILywPB5jIA377IDAnNzQUJDYrI19lW1Lvg4_fc4KsxqlpT31cif4MFsFGw2hZPAGDE7RG_Y5J5gxUUKcyHJDK3lOV4iy7HX9xdhzHiigpqu9GsufPQK0Ag13FpvDWa9uyC_GNEADOmIR27HWdbG_R24ZpwC2cQ5hj_kKXXW2Vz8Lb92xeZC0UEwXWzkyUiOsYx-PqvUl1yRJ282rvPHE6m6QzTebjiszU8EQb8rNLzJn4cU1kfqmBEpZztVLhJYxGud1ko7Wqk4RNFLkTcdpPMyXTTnrgQCmUcwzkRoqzJblphTQRmDlNT3m00)
 
-## Results
+### Bonus Resilience4j - Slow Call Rate Threshold and Slow Call Duration Threshold
+
+After advice of Robert Winkler (@rbrtwnklr) on [Twitter](https://twitter.com/rbrtwnklr/status/1325387117825036288?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1325387117825036288%7Ctwgr%5Eshare_3&ref_url=https%3A%2F%2Fpublish.twitter.com%2F%3Fquery%3Dhttps3A2F2Ftwitter.com2Frbrtwnklr2Fstatus2F1325387117825036288widget%3DTweet), I try this two configurations.
+
+- Slow Call Duration Threshold define time of a slow call (default 60000 ms)
+- Slow Call Rate Threshold is a percent value (value between 0 to 100 _default 100_). it's calculate with the minimumNumberOfCalls value and the number of slow call
+
+For example, we have this configuration : 
+
+- minimumNumberOfCalls = 4
+- slowCallRateThreshold = 25%
+- slowCallDurationThreshold = 3 secondes
+
+And there is no error during call (we have a response) but just a slow call...
+
+![plantuml](img/slow_call.png)
+
+[plantuml](http://www.plantuml.com/plantuml/umla/xP4_JyCm4CLtVufZO4mZIbaoe0Ag6Bl0mEWwryOYjgFpkN_uzBXgRPKGO0C9TQhU-Rrtrr-cdYLnCAsuq5QreKPec3jVbIN9pMYbkGcBu96KiuoMHygPSk5Liv7qLdOnM7231drff6UaygWKKcXHsXDBaMQZ_Ko8vzWAnIsyk41tdOOA7cTFKEwYB6IdXLIirv8n6KGonio39XKqtnFALwGOnIsgm9X3FOVe1MB5d1iytUkYxYrE5c5TLAHN3UTP1RDMTXvhO6qmbbnvaIkBeHC9EP0LDNecjyj5dqxxW2I7llfZ6KgCxOaEPLBVlsC--NNcP-RZlsP-PdvcVg3craYzXoffM1oxj0VNeGMvvAZ6DvUWPDlwG_Ww_Yx1QAjDC30vFFMe3TwNjgJ9FAxudlPigx1ZxV9N-fbspWm2dwAjWsdV0G00)
+
+Circuit Breaker is now open because we have 25% (slowCallRateThreshold) of 4 calls (minimumNumberOfCalls) greater than 3 secondes (slowCallDurationThreshold)
+
+_Sleep Window reset circuit breaker state (open to close)..._
+
+## Circuit breaker Results
 
 ### Hystrix
 
@@ -169,7 +191,6 @@ In exception endpoint
 - _Circuit breaker close_ : expose a BadRequestException
 - _Circuit breaker open_ : expose a CircuitBreakerOpenException
 
-
 ## Unit Tests
 
 Try to test with a unit test circuit breaker (for example in case of fallback?)
@@ -188,7 +209,7 @@ see [here](resilience4j/src/test/java/fr/jufab/hystrixr4jlab/infrastructure/gith
 
 ### Microprofile fault tolerance
 
-No unit test for the circuit breaker : only integration test (_Not Implemented_)
+No unit test for the circuit breaker : only on integration test (_Not Implemented_)
 
 
 _to be continued..._

@@ -13,7 +13,8 @@ import javax.ws.rs.core.Response;
  * @version 1.0
  */
 public class GithubJufabApi {
-  private static final String URL_JUFAB_RELEASE = "https://api.github.com/repos/jufab/opentelemetry-angular-interceptor/releases";
+  private static final String URL_JUFAB_RELEASE =
+      "https://api.github.com/repos/jufab/opentelemetry-angular-interceptor/releases";
 
   public String getAJsonRelease() {
     Client client = ClientBuilder.newClient();
@@ -26,5 +27,22 @@ public class GithubJufabApi {
 
   public String getAnException() {
     throw new BadRequestException("bad");
+  }
+
+  public String getASlowlyJsonRelease() {
+    Client client = ClientBuilder.newClient();
+    WebTarget webTarget =
+        client.target(URL_JUFAB_RELEASE);
+    Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+    Response response = invocationBuilder.get();
+    Runnable runner = () -> {
+      try {
+        Thread.sleep(((int) (Math.random() * 6) + 1) * 1000);
+      } catch (InterruptedException e) {
+        ///Nothing
+      }
+    };
+    runner.run();
+    return response.readEntity(String.class);
   }
 }

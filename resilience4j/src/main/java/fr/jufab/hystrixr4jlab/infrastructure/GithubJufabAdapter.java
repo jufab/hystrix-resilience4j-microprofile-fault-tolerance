@@ -25,4 +25,8 @@ public class GithubJufabAdapter implements GithubPort {
   @Override public String getException() {
     return this.githubCircuitBreaker.executeException();
   }
+
+  @Override public String getSlowRelease() {
+    return this.githubCircuitBreaker.executeSlowlyJSONRelease();
+  }
 }

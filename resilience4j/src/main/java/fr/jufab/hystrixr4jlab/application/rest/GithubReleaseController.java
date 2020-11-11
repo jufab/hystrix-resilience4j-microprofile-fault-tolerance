@@ -39,4 +39,14 @@ public class GithubReleaseController {
       return bad.getClass().getCanonicalName();
     }
   }
+
+  @Path("/slow")
+  @GET
+  public String getSlowRelease() {
+    try {
+      return this.gitHubJufabService.getSlowRelease();
+    } catch (Exception bad) {
+      return bad.getClass().getCanonicalName();
+    }
+  }
 }
